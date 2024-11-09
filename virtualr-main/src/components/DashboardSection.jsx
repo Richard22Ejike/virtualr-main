@@ -1,5 +1,5 @@
 import  { useState, useEffect } from 'react';
-
+import { BACKEND_URL } from '../constants';
 
 const Dashboard = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -41,42 +41,38 @@ const Dashboard = () => {
     logo: ''
   });
 
-  // Fetch all testimonials from the server
+  // Fetch all sponsors from the server
   const fetchSponsors = async () => {
     try {
-      const response = await fetch('http://localhost:5000/sponsors');
+      const response = await fetch(`${BACKEND_URL}/sponsors`);
       const data = await response.json();
-      console.log(data)
       setSponsors(data);
     } catch (error) {
-      console.error("Error fetching spons0rs:", error);
+      console.error("Error fetching sponsors:", error);
     }
   };
 
-  // Add a new testimonial to the server
   const addSponsor = async () => {
     try {
-      await fetch('http://localhost:5000/sponsors', {
+      await fetch(`${BACKEND_URL}/sponsors`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSponsor)
       });
-      fetchSponsors(); // Refresh testimonials after adding
-      setNewSponsor({ name: '', link: '', description: '', logo: '' }); // Clear form
+      fetchSponsors();
+      setNewSponsor({ name: '', link: '', description: '', logo: '' });
     } catch (error) {
       console.error("Error adding sponsor:", error);
     }
   };
 
-  // Delete a testimonial by user name
   const deleteSponsor = async (user) => {
     try {
-      await fetch(`http://localhost:5000/sponsors/${user}`, {
+      await fetch(`${BACKEND_URL}/sponsors/${user}`, {
         method: 'DELETE'
       });
-          fetchSponsors(); // Refresh testimonials after deletion
+      fetchSponsors();
     } catch (error) {
-      
       console.error("Error deleting sponsor:", error);
     }
   };
@@ -85,39 +81,37 @@ const Dashboard = () => {
     fetchSponsors();
   }, []);
 
-  // Fetch all shows from the server
   const fetchShows = async () => {
     try {
-      const response = await fetch('http://localhost:5000/shows');
+      const response = await fetch(`${BACKEND_URL}/shows`);
       const data = await response.json();
       setShows(data);
     } catch (error) {
       console.error("Error fetching shows:", error);
     }
   };
+
   const addShow = async () => {
     try {
-      await fetch('http://localhost:5000/shows', {
+      await fetch(`${BACKEND_URL}/shows`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newShow)
       });
-      fetchShows(); // Refresh testimonials after adding
-      setNewShow({ video: '', title: '', link: '', subtitle: '', text: '' }); // Clear form
+      fetchShows();
+      setNewShow({ video: '', title: '', link: '', subtitle: '', text: '' });
     } catch (error) {
-      console.error("Error adding sponsor:", error);
+      console.error("Error adding show:", error);
     }
   };
 
-  // Delete a testimonial by user name
   const deleteShow = async (title) => {
     try {
-      await fetch(`http://localhost:5000/shows/${title}`, {
+      await fetch(`${BACKEND_URL}/shows/${title}`, {
         method: 'DELETE'
       });
-          fetchShows(); // Refresh testimonials after deletion
+      fetchShows();
     } catch (error) {
-      
       console.error("Error deleting show:", error);
     }
   };
@@ -126,13 +120,11 @@ const Dashboard = () => {
     fetchShows();
   }, []);
 
-
   const loadPodcasts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/podcasts');
+      const response = await fetch(`${BACKEND_URL}/podcasts`);
       const data = await response.json();
       setPodcasts(data);
-    
     } catch (error) {
       console.error("Error loading podcasts:", error);
     }
@@ -140,12 +132,12 @@ const Dashboard = () => {
 
   const addPodcast = async () => {
     try {
-      await fetch('http://localhost:5000/podcasts', {
+      await fetch(`${BACKEND_URL}/podcasts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newPodcast)
       });
-      loadPodcasts(); // Reload the podcasts
+      loadPodcasts();
     } catch (error) {
       console.error("Error adding podcast:", error);
     }
@@ -153,10 +145,10 @@ const Dashboard = () => {
 
   const deletePodcast = async (title) => {
     try {
-      await fetch(`http://localhost:5000/podcasts/${title}`, {
+      await fetch(`${BACKEND_URL}/podcasts/${title}`, {
         method: 'DELETE'
       });
-      loadPodcasts(); // Reload the podcasts
+      loadPodcasts();
     } catch (error) {
       console.error("Error deleting podcast:", error);
     }
@@ -166,42 +158,37 @@ const Dashboard = () => {
     loadPodcasts();
   }, []);
 
-  
-  // Fetch about data from the server
   const fetchAbouts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/abouts');
+      const response = await fetch(`${BACKEND_URL}/abouts`);
       const data = await response.json();
       setAbouts(data);
     } catch (error) {
       console.error("Error fetching abouts:", error);
     }
   };
+
   const addAbout = async () => {
     try {
-        
-      await fetch('http://localhost:5000/abouts', {
+      await fetch(`${BACKEND_URL}/abouts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newAbout)
       });
-      fetchAbouts(); // Refresh testimonials after adding
-      setNewAbout({ title: '', image: '', text: '' }); // Clear form
+      fetchAbouts();
+      setNewAbout({ title: '', image: '', text: '' });
     } catch (error) {
       console.error("Error adding about:", error);
     }
   };
 
-  // Delete a testimonial by user name
   const deleteAbout = async (user) => {
-    console.log(user)
     try {
-      await fetch(`http://localhost:5000/abouts/${user}`, {
+      await fetch(`${BACKEND_URL}/abouts/${user}`, {
         method: 'DELETE'
       });
-          fetchAbouts(); // Refresh testimonials after deletion
+      fetchAbouts();
     } catch (error) {
-      
       console.error("Error deleting about:", error);
     }
   };
@@ -210,10 +197,9 @@ const Dashboard = () => {
     fetchAbouts();
   }, []);
 
-  // Fetch all testimonials from the server
   const fetchTestimonials = async () => {
     try {
-      const response = await fetch('http://localhost:5000/testimonials');
+      const response = await fetch(`${BACKEND_URL}/testimonials`);
       const data = await response.json();
       setTestimonials(data);
     } catch (error) {
@@ -221,30 +207,27 @@ const Dashboard = () => {
     }
   };
 
-  // Add a new testimonial to the server
   const addTestimonial = async () => {
     try {
-      await fetch('http://localhost:5000/testimonials', {
+      await fetch(`${BACKEND_URL}/testimonials`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTestimonial)
       });
-      fetchTestimonials(); // Refresh testimonials after adding
-      setNewTestimonial({ user: '', text: '', company: '', image: '' }); // Clear form
+      fetchTestimonials();
+      setNewTestimonial({ user: '', text: '', company: '', image: '' });
     } catch (error) {
       console.error("Error adding testimonial:", error);
     }
   };
 
-  // Delete a testimonial by user name
   const deleteTestimonial = async (user) => {
     try {
-      await fetch(`http://localhost:5000/testimonials/${user}`, {
+      await fetch(`${BACKEND_URL}/testimonials/${user}`, {
         method: 'DELETE'
       });
-          fetchTestimonials(); // Refresh testimonials after deletion
+      fetchTestimonials();
     } catch (error) {
-      
       console.error("Error deleting testimonial:", error);
     }
   };

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-
+import { BACKEND_URL } from '../constants';
 const AboutUsSection = () => {
   const [abouts, setAbouts] = useState([]);
   
   // Fetch about data from the server
   const fetchAbouts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/abouts');
+      const response = await fetch(`${BACKEND_URL}/about`);
       const data = await response.json();
       setAbouts(data);
     } catch (error) {

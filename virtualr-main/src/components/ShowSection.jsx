@@ -3,21 +3,15 @@ import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from 'react';
 import { useColors } from "../constants/index";
 import Slider from "react-slick";
-
+import { BACKEND_URL } from '../constants';
 const ShowSection = () => {
   const [shows, setShows] = useState([]);
-  const [newShow, setNewShow] = useState({
-    video: '',
-    title: '',
-    subtitle: '',
-    link: '',
-    text: '',
-  });
+
 
   // Fetch all shows from the server
   const fetchShows = async () => {
     try {
-      const response = await fetch('http://localhost:5000/shows');
+      const response = await fetch(`${BACKEND_URL}/shows`);
       const data = await response.json();
       setShows(data);
     } catch (error) {

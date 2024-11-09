@@ -1,20 +1,15 @@
 
 import  { useState, useEffect } from 'react';
-
+import { BACKEND_URL } from '../constants';
 
 const SponsorshipSection = () => {
   const [sponsors, setSponsors] = useState([]);
-  const [newSponsor, setNewSponsor] = useState({
-    name: '',
-    link: '',
-    description: '',
-    logo: ''
-  });
+
 
   // Fetch all testimonials from the server
   const fetchSponsors = async () => {
     try {
-      const response = await fetch('http://localhost:5000/sponsors');
+      const response = await fetch(`${BACKEND_URL}/sponsers`);
       const data = await response.json();
       setSponsors(data);
     } catch (error) {
@@ -22,33 +17,9 @@ const SponsorshipSection = () => {
     }
   };
 
-  // Add a new testimonial to the server
-  const addSpons0r = async () => {
-    try {
-      await fetch('http://localhost:5000/spons0rs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newSponsor)
-      });
-      fetchSponsors(); // Refresh testimonials after adding
-      setNewSponsor({ name: '', link: '', description: '', logo: '' }); // Clear form
-    } catch (error) {
-      console.error("Error adding sponsor:", error);
-    }
-  };
 
   // Delete a testimonial by user name
-  const deleteSponsor = async (user) => {
-    try {
-      await fetch(`http://localhost:5000/sponsors/${user}`, {
-        method: 'DELETE'
-      });
-          fetchSponsors(); // Refresh testimonials after deletion
-    } catch (error) {
-      
-      console.error("Error deleting sponsor:", error);
-    }
-  };
+
 
   useEffect(() => {
     fetchSponsors();

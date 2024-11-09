@@ -1,20 +1,14 @@
 
 import { FaSpotify, FaApple, FaGooglePlay } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-
+import { BACKEND_URL } from '../constants';
 const PodcastSection = () => {
   const [podcasts, setPodcasts] = useState([]);
-  const [newPodcast, setNewPodcast] = useState({
-    title: '',
-    description: '',
-    date: '',
-    thumbnail: '',
-    platforms: {}
-  });
+
 
   const loadPodcasts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/podcasts');
+      const response = await fetch(`${BACKEND_URL}/podcasts`);
       const data = await response.json();
       setPodcasts(data);
     
@@ -23,29 +17,6 @@ const PodcastSection = () => {
     }
   };
 
-  const addPodcast = async () => {
-    try {
-      await fetch('http://localhost:5000/podcasts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newPodcast)
-      });
-      loadPodcasts(); // Reload the podcasts
-    } catch (error) {
-      console.error("Error adding podcast:", error);
-    }
-  };
-
-  const deletePodcast = async (title) => {
-    try {
-      await fetch(`http://localhost:5000/podcasts/${title}`, {
-        method: 'DELETE'
-      });
-      loadPodcasts(); // Reload the podcasts
-    } catch (error) {
-      console.error("Error deleting podcast:", error);
-    }
-  };
 
   useEffect(() => {
     loadPodcasts();
