@@ -5,7 +5,7 @@ const PORT = 5000;
 const cors = require("cors");
 app.use(
     cors({
-      origin: ["http://localhost:5173", "https://rsvp-nbhy.onrender.com","https://rsvp-dashboard-dbl9.onrender.com"],
+      origin: ["http://localhost:5173", "https://rsvp-nbhy.onrender.com","https://rsvp-dashboard-dbl9.onrender.com", "https://virtualr-main.onrender.com",],
       credentials: true,
     })
   );
