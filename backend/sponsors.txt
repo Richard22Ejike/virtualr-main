@@ -1,0 +1,2 @@
+logo: "https://th.bing.com/th/id/R.36a637acd327c76357628dca25f838de?rik=KEv28AfFiyqYjA&pid=ImgRaw&r=0"| name: "Sponsor 1"| link: "https://sponsor1.com"| description: "Supporting our mission with unmatched dedication."
+logo: "https://th.bing.com/th/id/R.36a637acd327c76357628dca25f838de?rik=KEv28AfFiyqYjA&pid=ImgRaw&r=0"| name: "Sponsor 1"| link: "https://sponsor1.com"| description: "Supporting our mission with unmatched dedication."

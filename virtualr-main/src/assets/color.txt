@@ -1,0 +1,5 @@
+primaryBrown: "#45392C"
+primaryOlive: "#3B4537"
+accentBeige: "#D1B692"
+accentWarmBrown: "#A67C52"
+backgroundLight: "#F5EFE7"

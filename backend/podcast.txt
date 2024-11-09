@@ -1,0 +1,4 @@
+title: "Building Resililjlence in Business"| description: "Learn how resilience shapes success in challenging markets with our special guest."|date: "October 15, 2023"| thumbnail: "https://th.bing.com/th/id/R.36a637acd327c76357628dca25f838de?rik=KEv28AfFiyqYjA&pid=ImgRaw&r=0"| spotify:https://open.spotify.com/show/example | apple: "https://podcasts.apple.com/show/example"| google: "https://podcasts.google.com/show/example"
+title: "Building Resililjkence in Business"| description: "Learn how resilience shapes success in challenging markets with our special guest."|date: "October 15, 2023"| thumbnail: "https://th.bing.com/th/id/R.36a637acd327c76357628dca25f838de?rik=KEv28AfFiyqYjA&pid=ImgRaw&r=0"| spotify:https://open.spotify.com/show/example | apple: "https://podcasts.apple.com/show/example"| google: "https://podcasts.google.com/show/example"
+
+
