@@ -1,7 +1,7 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from 'react';
-import { useColors } from "../constants/index";
+import { colors } from "../constants";
 import Slider from "react-slick";
 import { BACKEND_URL } from '../constants';
 const ShowSection = () => {
@@ -23,7 +23,7 @@ const ShowSection = () => {
     fetchShows();
   }, []);
 
-  const colors = useColors();
+ 
 
   if (Object.keys(colors).length === 0) {
     return <div>Loading colors...</div>;

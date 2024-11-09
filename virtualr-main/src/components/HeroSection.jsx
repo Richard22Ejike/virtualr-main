@@ -1,8 +1,8 @@
 import video1 from "../assets/herosection.mp4";
-import { useColors } from "../constants";
+import { colors } from "../constants";
 
 const HeroSection = () => {
-  const colors = useColors();
+
 
   if (Object.keys(colors).length === 0) {
     return <div>Loading colors...</div>;
