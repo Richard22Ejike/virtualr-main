@@ -6,7 +6,7 @@ const AboutUsSection = () => {
   // Fetch about data from the server
   const fetchAbouts = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/about`);
+      const response = await fetch(`${BACKEND_URL}/abouts`);
       const data = await response.json();
       setAbouts(data);
     } catch (error) {

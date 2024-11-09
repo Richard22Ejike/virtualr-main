@@ -9,7 +9,7 @@ const SponsorshipSection = () => {
   // Fetch all testimonials from the server
   const fetchSponsors = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/sponsers`);
+      const response = await fetch(`${BACKEND_URL}/sponsors`);
       const data = await response.json();
       setSponsors(data);
     } catch (error) {
