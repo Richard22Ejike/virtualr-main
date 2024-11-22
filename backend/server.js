@@ -17,6 +17,57 @@ const testimonialFilePath = './testimonials.txt';
 const sponsorFilePath = './sponsors.txt';
 const showFilePath= './show.txt';
 const aboutFilePath = './about.txt';
+const eventFilePath = './event.txt';
+
+
+// Get all events// Get all events
+// Get all events
+app.get('/events', (req, res) => {
+  fs.readFile(eventFilePath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error reading file');
+
+    try {
+      const events = [];
+      
+      // Split the file by event "Name"
+      const eventBlocks = data.split(/\n(?=Name:)/); // Split by lines that start with "Name:" (using lookahead)
+
+      eventBlocks.forEach(block => {
+        if (block.trim()) {
+          const eventObj = {};
+          const lines = block.split('\n'); // Split the block into individual lines
+
+          // Process each line in the block
+          lines.forEach(line => {
+            const [key, ...valueParts] = line.split(':'); // Split line by ":"
+            if (key && valueParts.length) {
+              const formattedKey = key.trim(); // Clean the key
+              const formattedValue = valueParts.join(':').trim().replace(/['"]/g, ''); // Clean the value (remove quotes)
+
+              // Handle specific fields
+              if (formattedKey === 'Activities' || formattedKey === 'Guests') {
+                eventObj[formattedKey] = formattedValue.split(',').map(a => a.trim());
+              } else if (formattedKey === 'Time') {
+                eventObj[formattedKey] = formattedValue.split(',').map(t => t.trim());
+              } else {
+                eventObj[formattedKey] = formattedValue; // General case for other fields
+              }
+            }
+          });
+
+         // Log the event object for debugging
+          // Add the event to the list
+          events.push(eventObj);
+        }
+      });
+      console.log(events);
+      // Send the parsed events as JSON
+      res.json(events);
+    } catch (error) {
+      res.status(500).send('Error processing file data');
+    }
+  });
+});
 
 
 // Get all abouts

@@ -17,6 +17,7 @@ const HeroSection = () => {
         autoPlay
         loop
         muted
+        poster="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
       >
         <source src={video1} type="video/mp4" />
@@ -52,26 +53,7 @@ const HeroSection = () => {
         </p>
 
         <div className="flex justify-center my-10">
-          <a
-            href="#"
-            className="py-3 px-4 mx-3 rounded-md"
-            style={{
-              backgroundImage: `linear-gradient(to right, ${colors.accentWarmBrown}, ${colors.primaryBrown})`,
-              color: colors.backgroundLight,
-            }}
-          >
-            Start for free
-          </a>
-          <a
-            href="#"
-            className="py-3 px-4 mx-3 rounded-md border"
-            style={{
-              borderColor: colors.primaryBrown,
-              color: colors.primaryBrown,
-            }}
-          >
-            Documentation
-          </a>
+         
         </div>
       </div>
     </div>

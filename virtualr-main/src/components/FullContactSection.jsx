@@ -1,16 +1,10 @@
 
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa';
-import background_pic from "../assets/profile-pictures/podcast2.jpg"; // Import background image
 
-const ContactUsSection = () => {
+const FullContactUsSection = () => {
   return (
-    <section id="Contact" 
-    className="bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage: `url(${background_pic})`,
-    }}
-    >
-    <div className="flex flex-col items-center p-8 lg:p-16 bg-opacity-50 bg-customGrey">
+    <section id="Contact">
+    <div className="flex flex-col items-center p-8 lg:p-16 bg-customGrey">
       {/* Section Header */}
       <h2 className="text-4xl font-bold text-gray-300 mb-4">Contact Us</h2>
       <p className="text-center text-gray-100 max-w-lg mb-10">
@@ -95,4 +89,4 @@ const ContactUsSection = () => {
   );
 };
 
-export default ContactUsSection;
+export default FullContactUsSection;

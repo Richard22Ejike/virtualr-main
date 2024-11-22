@@ -23,14 +23,14 @@ const Testimonials = () => {
 
   return (
     <section id="Testimonial">
-    <div className="mt-20 tracking-wide bg-green-700 py-8">
+    <div className=" tracking-wide py-8">
       <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-10 lg:my-20">
         What People are saying
       </h2>
       <div className="flex flex-wrap justify-center">
         {testimonials.map((testimonial, index) => (
           <div key={index} className="w-full sm:w-1/2 lg:w-1/3 px-4 py-2">
-            <div className="rounded-md p-6 text-md font-thin bg-green-950">
+            <div className="rounded-md p-6 text-md font-thin bg-customlightBrown">
               <p className="mb-6">{testimonial.text}</p>
               <div className="flex items-start mt-8">
                 <img

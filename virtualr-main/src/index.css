@@ -10,12 +10,12 @@
 
 
 :root {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Source Sans Pro', arial, sans-serif;
   color-scheme: light;
 }
 
 body {
-  @apply bg-green-950 text-white tracking-wider;
+  @apply bg-customBrown text-white tracking-wider;
 }
 
 html {
