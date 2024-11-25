@@ -33,10 +33,29 @@ const SponsorshipSection = () => {
         <div className="flex flex-col items-center p-8 lg:p-16">
           <h2 className="text-4xl font-bold text-white mb-6">Our Partners</h2>
           <p className="text-center text-white max-w-2xl mb-12">
-            We are grateful for the support of our sponsors who make our mission
+            We are grateful for the support of our partners who make our mission
             possible. Thank you for partnering with us on this journey.
           </p>
-
+          {sponsors.length === 0 ? (
+      // Centered placeholder text when no events exist
+      <div className="flex flex-col items-center justify-center h-[200px] text-center text-xl font-semibold">
+ <div 
+      style={{
+        fontFamily:"omnes-pro",
+        fontWeight: 400,
+        fontSize: "42px",
+        lineHeight: "1.2em",
+    
+      }}
+      className=" text-xl font-semibold mb-20">
+        More information to come.
+      </div>
+    
+   
+      </div>
+     
+    ) : (
+      <>
           {/* Sponsor logos and descriptions grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 w-full max-w-5xl mb-12">
             {sponsors.map((sponsor, index) => (
@@ -69,14 +88,11 @@ const SponsorshipSection = () => {
               Join our family of sponsors and help drive our mission forward.
               Reach out to us to learn about sponsorship opportunities.
             </p>
-            <a
-              href="/sponsorship-opportunities"
-              className="px-6 py-3 bg-white text-green-950 font-semibold rounded-full hover:bg-gray-100 transition duration-300"
-            >
-              Become a Sponsor
-            </a>
+           
           </div>
+          </> )}
         </div>
+      
       </div>
     </section>
   );

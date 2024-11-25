@@ -3,6 +3,7 @@ import  { useState, useEffect } from 'react';
 import { BACKEND_URL } from '../constants';
 import { colors } from "../constants";
 import background_pic from "../assets/profile-pictures/podcast1.jpg";
+import background_pic_hero from "../assets/profile-pictures/show2.jpg";
 
  // Import background image
 
@@ -38,9 +39,9 @@ const FullSponsorshipSection = () => {
 
 
   {/* Content Overlay */}
-  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 ">
+  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-black bg-opacity-80">
   <img
-    src="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
+    src={background_pic_hero}
     alt="Background Poster"
     className="absolute top-0 left-0 w-full h-full object-cover -z-10"
   />
@@ -104,12 +105,7 @@ const FullSponsorshipSection = () => {
         <p className="mb-6">
           Join our family of sponsors and help drive our mission forward. Reach out to us to learn about sponsorship opportunities.
         </p>
-        <a
-          href="/sponsorship-opportunities"
-          className="px-6 py-3 bg-white text-green-950 font-semibold rounded-full hover:bg-gray-100 transition duration-300"
-        >
-          Become a Sponsor
-        </a>
+     
       </div>
       </div>
       </div>

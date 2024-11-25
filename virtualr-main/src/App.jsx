@@ -11,9 +11,11 @@ import SponsorshipSection from "./components/SponsorShipSection";
 import Testimonials from "./components/Testimonials";
 import PodcastSection from "./components/PodcastSection";
 import ContactUsSection from "./components/ContactUsSection";
+
 import Dashboard from "./components/DashboardSection";
 import FullPodcastSection from "./components/FullPodcastSection";
 import FullRodeoSection from "./components/RodeoEventSection";
+import PasscodeSection from "./components/PasscodeSection";
 
 const App = () => {
   return (
@@ -33,7 +35,7 @@ const App = () => {
               <AboutUsSection />
               <SponsorshipSection />
               <PodcastSection />
-              <ContactUsSection />
+              {/* <ContactUsSection /> */}
               <Testimonials />
           </>
         } />
@@ -43,6 +45,7 @@ const App = () => {
         <Route path="/about" element={<FullAboutUsSection />} />
         <Route path="/sponsor" element={<FullSponsorshipSection />} />
         <Route path="/rodeo" element={<FullRodeoSection/>}/>
+        <Route path="/passcode" element={<PasscodeSection/>}/>
       </Routes>
       <Footer />
     </Router>

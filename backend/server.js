@@ -18,7 +18,73 @@ const sponsorFilePath = './sponsors.txt';
 const showFilePath= './show.txt';
 const aboutFilePath = './about.txt';
 const eventFilePath = './event.txt';
+const rsvpFilePath = './rsvp.txt';
 
+
+// Get all rsvps
+app.get('/rsvps', (req, res) => {
+
+  fs.readFile(rsvpFilePath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error reading file');
+    const rsvps = data
+      .split('\n')
+      .filter(line => line.trim())
+      .map(line => line.split('|').reduce((acc, part) => {
+        const [key, ...valueParts] = part.split(':');
+        const value = valueParts.join(':').trim();
+        acc[key.trim()] = value.replace(/['"]/g, '');
+        return acc;
+      }, {}));
+    res.json(rsvps);
+  });
+});
+
+// Add a new testimonial
+app.post('/rsvps', (req, res) => {
+  const newRsvp = req.body;
+  const rsvpLine = `name: "${newRsvp.name}" | phone: "${newRsvp.phone}" | email: "${newRsvp.email}" | id: "${newRsvp.id}" \n`;
+
+  fs.appendFile(rsvpFilePath, `${rsvpLine}`, err => {
+    if (err) return res.status(500).send('Error adding rsvp');
+    res.send('Rsvp added successfully');
+  });
+});
+
+// Delete a testimonial by user name
+app.delete('/rsvps/:name', (req, res) => {
+  const nameToDelete = req.params.name;
+
+  fs.readFile(rsvpFilePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).send('Error reading file');
+    }
+
+    // Split the file into lines (assuming each RSVP is on a new line)
+    const lines = data.split('\n');
+
+    // Find the index of the first line that contains the `name`
+    const indexToDelete = lines.findIndex(line => line.includes(`name: "${nameToDelete}"`));
+
+    // If the RSVP with the name is not found
+    if (indexToDelete === -1) {
+      return res.status(404).send('RSVP not found');
+    }
+
+    // Remove only the first matching RSVP
+    lines.splice(indexToDelete, 1);
+
+    // Write the updated lines back to the file
+    fs.writeFile(rsvpFilePath, lines.join('\n'), err => {
+      if (err) {
+        console.error('Error writing file:', err);
+        return res.status(500).send('Error deleting RSVP');
+      }
+
+      res.send('RSVP deleted successfully');
+    });
+  });
+});
 
 // Get all events// Get all events
 // Get all events
@@ -60,7 +126,7 @@ app.get('/events', (req, res) => {
           events.push(eventObj);
         }
       });
-      console.log(events);
+    
       // Send the parsed events as JSON
       res.json(events);
     } catch (error) {
@@ -68,6 +134,43 @@ app.get('/events', (req, res) => {
     }
   });
 });
+
+app.post('/events', (req, res) => {
+  const newEvent = req.body;
+ console.log(newEvent);
+  // Use default values for undefined fields
+  const name = newEvent.name || 'Untitled Event';
+  const activities = Array.isArray(newEvent.activities) ? newEvent.activities.join(', ') : 'No activities';
+  const about = newEvent.about || 'No description';
+  const time = Array.isArray(newEvent.time) ? newEvent.time.join(', ') : 'No time specified';
+  const guest = Array.isArray(newEvent.guest) ? newEvent.guest.join(', ') : 'No guests';
+  const date = newEvent.date || 'No date';
+
+  const eventLine = `Name: "${name}"\nActivities: "${activities}"\nAbout: "${about}"\nTime: "${time}"\nGuests: "${guest}"\nDate: "${date}"\n\n`;
+
+  // Append to file
+  fs.appendFile(eventFilePath, eventLine, err => {
+    if (err) return res.status(500).send('Error adding event');
+    res.send('Event added successfully');
+  });
+});
+
+app.delete('/events/:name', (req, res) => {
+  const eventNameToDelete = req.params.name;
+
+  fs.readFile(eventFilePath, 'utf8', (err, data) => {
+    if (err) return res.status(500).send('Error reading file');
+
+    const eventBlocks = data.split(/\n(?=Name:)/);
+    const filteredBlocks = eventBlocks.filter(block => !block.includes(`Name: "${eventNameToDelete}"`));
+
+    fs.writeFile(eventFilePath, filteredBlocks.join('\n'), err => {
+      if (err) return res.status(500).send('Error deleting event');
+      res.send('Event deleted successfully');
+    });
+  });
+});
+
 
 
 // Get all abouts

@@ -25,3 +25,5 @@ About:"Join us for an exciting in-person event where you can dive into the world
 Time: "Starts 3:00 PM", "Lasso Challenges 4:00 PM", "Quick Draw Contest 5:30 PM", "End 8:00 PM"
 Guests: "Billy Gunner", "Rosa Wild", "Chuck Sheriff"
 Date: "December 22nd, 2024"
+
+

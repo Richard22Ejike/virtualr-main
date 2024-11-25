@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import logo from "../assets/logocrossln.png";
 import { navItems, colors } from "../constants";
 
+
 const Navbar = () => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,7 +22,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 z-50 py-3 border-b transition-colors duration-300 w-full ${
+      className={`absolute top-0 z-50 py-3 border-b transition-colors duration-300 w-full ${
         isScrolled ? "backdrop-blur-lg bg-white/20" : "bg-transparent"
       }`}
       style={{ borderColor: `${colors.primaryOlive}80` }}
@@ -30,7 +31,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2 flex-shrink-0">
             <img className="h-10 w-10" src={logo} alt="Logo" />
-            <span className="text-xl tracking-tight">Empty Cross</span>
+            <a className="text-2xl tracking-tight" href="/">Empty Cross Promotions</a>
           </div>
 
           <ul className="hidden lg:flex ml-auto space-x-12">

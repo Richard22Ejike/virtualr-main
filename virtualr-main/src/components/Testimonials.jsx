@@ -23,14 +23,42 @@ const Testimonials = () => {
 
   return (
     <section id="Testimonial">
-    <div className=" tracking-wide py-8">
+    <div className=" tracking-wide py-8 text-black">
       <h2 className="text-3xl sm:text-5xl lg:text-6xl text-center my-10 lg:my-20">
         What People are saying
       </h2>
+      {testimonials.length === 0 ? (
+      // Centered placeholder text when no events exist
+      <div className="flex flex-col items-center justify-center h-[300px] text-center text-xl font-semibold text-black">
+ <div 
+      style={{
+        fontFamily:"omnes-pro",
+        fontWeight: 400,
+        fontSize: "42px",
+        lineHeight: "1.2em",
+    
+      }}
+      className=" text-xl font-semibold text-black mb-20">
+        More information to come.
+      </div>
+      <div
+      style={{
+        fontFamily:"freight-sans-pro",
+        fontWeight: 400,
+        fontSize: "18px",
+        lineHeight: "1.6em",
+      }}
+      >
+      More testimonial to come
+        </div>
+      </div>
+     
+    ) : (
+      <>
       <div className="flex flex-wrap justify-center">
         {testimonials.map((testimonial, index) => (
           <div key={index} className="w-full sm:w-1/2 lg:w-1/3 px-4 py-2">
-            <div className="rounded-md p-6 text-md font-thin bg-customlightBrown">
+            <div className="rounded-md p-6 text-md font-thin bg-white rounded-lg shadow-lg overflow-hidden">
               <p className="mb-6">{testimonial.text}</p>
               <div className="flex items-start mt-8">
                 <img
@@ -51,7 +79,7 @@ const Testimonials = () => {
           </div>
         ))}
       </div>
-
+      </>)}
       
     </div>
     </section>

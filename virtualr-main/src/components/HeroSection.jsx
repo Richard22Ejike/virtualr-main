@@ -1,33 +1,22 @@
-import video1 from "../assets/herosection.mp4";
+import homePic from "../assets/profile-pictures/home.jpg";
 import { colors } from "../constants";
 
 const HeroSection = () => {
-
-
   if (Object.keys(colors).length === 0) {
     return <div>Loading colors...</div>;
   }
 
   return (
-    
-    
-    <div className="relative h-screen w-screen overflow-hidden">
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        poster="https://img1.wsimg.com/isteam/videos/uA41GmyyG8IMaxXdb"
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-      >
-        <source src={video1} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+    <div
+      className="relative h-screen w-screen bg-cover bg-center flex items-center justify-center"
+      style={{
+        backgroundImage: `url(${homePic})`,
+      }}
+    >
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center px-6">
         <h1
-          className="text-4xl sm:text-6xl lg:text-7xl tracking-wide"
+          className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-wide"
           style={{
             color: colors.backgroundLight,
           }}
@@ -40,7 +29,7 @@ const HeroSection = () => {
             }}
           >
             {" "}
-            for users
+            Saddle Up
           </span>
         </h1>
 
@@ -48,13 +37,11 @@ const HeroSection = () => {
           className="mt-10 text-lg max-w-4xl"
           style={{ color: colors.backgroundLight }}
         >
-          intuitive development tools. Get started today and turn your imagination
-          into immersive reality!
+          Embrace the spirit of adventure and explore a world where grit meets
+          grandeur. 
         </p>
 
-        <div className="flex justify-center my-10">
-         
-        </div>
+       
       </div>
     </div>
   );

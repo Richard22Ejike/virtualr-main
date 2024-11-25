@@ -9,12 +9,12 @@ const Footer = () => {
           <h3 className="text-md font-semibold mb-4">Show Page</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/show" className="text-neutral-300 hover:text-white">
+              <a href="/show" className="text-neutral-900 hover:text-grey-700">
                 Our Show
               </a>
             </li>
             <li>
-              <a href="/episodes" className="text-neutral-300 hover:text-white">
+              <a href="/episodes" className="text-neutral-900 hover:text-grey-700">
                 Episodes
               </a>
             </li>
@@ -26,12 +26,12 @@ const Footer = () => {
           <h3 className="text-md font-semibold mb-4">Podcasts</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/podcasts" className="text-neutral-300 hover:text-white">
+              <a href="/podcasts" className="text-neutral-900 hover:text-gray-700">
                 Latest Podcasts
               </a>
             </li>
             <li>
-              <a href="/subscribe" className="text-neutral-300 hover:text-white">
+              <a href="/subscribe" className="text-neutral-900 hover:text-gray-700">
                 Subscribe
               </a>
             </li>
@@ -43,12 +43,12 @@ const Footer = () => {
           <h3 className="text-md font-semibold mb-4">Sponsorship</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/sponsorship" className="text-neutral-300 hover:text-white">
+              <a href="/sponsorship" className="text-neutral-900 hover:text-gray-700">
                 Become a Sponsor
               </a>
             </li>
             <li>
-              <a href="/partners" className="text-neutral-300 hover:text-white">
+              <a href="/partners" className="text-neutral-900 hover:text-gray-700">
                 Our Partners
               </a>
             </li>
@@ -60,17 +60,17 @@ const Footer = () => {
           <h3 className="text-md font-semibold mb-4">About & Contact</h3>
           <ul className="space-y-2">
             <li>
-              <a href="/about" className="text-neutral-300 hover:text-white">
+              <a href="/about" className="text-neutral-900 hover:text-gray-700">
                 About Us
               </a>
             </li>
             <li>
-              <a href="/contact" className="text-neutral-300 hover:text-white">
+              <a href="/contact" className="text-neutral-900 hover:text-gray-700">
                 Contact Us
               </a>
             </li>
             <li>
-              <Link to="/dashboard" className="text-neutral-300 hover:text-white">Settings</Link>
+              <Link to="/passcode" className="text-neutral-900 hover:text-gray-700">Settings</Link>
             </li>
           </ul>
         </div>
@@ -78,16 +78,16 @@ const Footer = () => {
 
       {/* Social Media Links */}
       <div className="flex justify-center space-x-6 mt-8">
-        <a href="https://www.youtube.com" className="text-neutral-300 hover:text-red-500">
+        <a href="https://www.youtube.com" className="text-neutral-900 hover:text-red-500">
           <FaYoutube size={24} />
         </a>
-        <a href="https://www.instagram.com" className="text-neutral-300 hover:text-pink-500">
+        <a href="https://www.instagram.com" className="text-neutral-900 hover:text-pink-500">
           <FaInstagram size={24} />
         </a>
-        <a href="https://www.facebook.com" className="text-neutral-300 hover:text-blue-500">
+        <a href="https://www.facebook.com" className="text-neutral-900 hover:text-blue-500">
           <FaFacebook size={24} />
         </a>
-        <a href="https://www.tiktok.com" className="text-neutral-300 hover:text-black">
+        <a href="https://www.tiktok.com" className="text-neutral-900 hover:text-black">
           <FaTiktok size={24} />
         </a>
       </div>

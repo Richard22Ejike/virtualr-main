@@ -52,7 +52,34 @@ const ShowSection = () => {
         <h2 className="text-2xl lg:text-3xl text-center my-6 lg:my-10 text-white">
           Featured Videos
         </h2>
-
+        {shows.length === 0 ? (
+      // Centered placeholder text when no events exist
+      <div className="flex flex-col items-center justify-center h-[300px] text-center text-xl font-semibold ">
+ <div 
+      style={{
+        fontFamily:"omnes-pro",
+        fontWeight: 400,
+        fontSize: "42px",
+        lineHeight: "1.2em",
+    
+      }}
+      className=" text-xl font-semibold mb-20">
+        More information to come.
+      </div>
+      <div
+      style={{
+        fontFamily:"freight-sans-pro",
+        fontWeight: 400,
+        fontSize: "18px",
+        lineHeight: "1.6em",
+      }}
+      >
+      More Show videos to come
+        </div>
+      </div>
+     
+    ) : (
+      <>
         <Slider {...sliderSettings} className="w-full max-w-7xl ">
           {shows.map((show, index) => (
             <div
@@ -92,6 +119,7 @@ const ShowSection = () => {
             </div>
           ))}
         </Slider>
+        </>)}
       </div>
     </section>
   );

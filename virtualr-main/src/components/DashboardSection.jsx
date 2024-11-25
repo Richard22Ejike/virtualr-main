@@ -41,6 +41,84 @@ const Dashboard = () => {
     logo: ''
   });
 
+  const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState({
+    name: '',
+    activities: [],
+    about: '',
+    time: [],
+    guest: [],
+    date: '',
+  });
+  const [rsvps, setRsvps] = useState([]);
+  const [tempValue, setTempValue] = useState('');
+  const addToArray = (key) => {
+    console.log('Adding to array:', key);
+    if (!Array.isArray(newEvent[key])) {
+      console.error(`Invalid key "${key}". Expected an array.`);
+      return;
+    }
+    const updatedArray = [...newEvent[key], tempValue];
+    setNewEvent({
+      ...newEvent,
+      [key]: updatedArray,
+    });
+    setTempValue('');
+    console.log(`Updated ${key}:`, updatedArray);
+  };
+  
+
+  const handleDateChange = (e) => {
+    const date = new Date(e.target.value);
+    const formattedDate = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+    setNewEvent({ ...newEvent, date: formattedDate });
+  };
+  // Fetch events
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/events`);
+      const data = await response.json();
+      
+      setEvents(data);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
+
+  const addEvent = async () => {
+    try {
+      console.log(newEvent);
+      await fetch(`${BACKEND_URL}/events`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEvent)
+      });
+      fetchEvents();
+      setNewEvent({    name: '',
+        activities: [],
+        about: '',
+        time: [],
+        guest: [],
+        date: '',});
+    } catch (error) {
+      console.error("Error adding event:", error);
+    }
+  };
+
+  const deleteEvent = async (name) => {
+    try {
+      await fetch(`${BACKEND_URL}/events/${name}`, {
+        method: 'DELETE'
+      });
+      fetchEvents();
+    } catch (error) {
+      console.error("Error deleting event:", error);
+    }
+  };
   // Fetch all sponsors from the server
   const fetchSponsors = async () => {
     try {
@@ -51,6 +129,27 @@ const Dashboard = () => {
       console.error("Error fetching sponsors:", error);
     }
   };
+  const fetchRsvps = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/rsvps`);
+      const data = await response.json();
+      setRsvps(data);
+    } catch (error) {
+      console.error("Error fetching rsvps:", error);
+    }
+  };
+  useEffect(() => {
+    fetchRsvps();
+  }, []);
+
+  const groupedRsvps = rsvps.reduce((groups, rsvp) => {
+    const { id } = rsvp;
+    if (!groups[id]) {
+      groups[id] = [];
+    }
+    groups[id].push(rsvp);
+    return groups;
+  }, {});
 
   const addSponsor = async () => {
     try {
@@ -118,6 +217,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchShows();
+    fetchEvents();
   }, []);
 
   const loadPodcasts = async () => {
@@ -127,6 +227,16 @@ const Dashboard = () => {
       setPodcasts(data);
     } catch (error) {
       console.error("Error loading podcasts:", error);
+    }
+  };
+
+  const loadRsvps = async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/rsvps`);
+      const data = await response.json();
+      setRsvps(data);
+    } catch (error) {
+      console.error("Error loading rsvps:", error);
     }
   };
 
@@ -154,8 +264,20 @@ const Dashboard = () => {
     }
   };
 
+  const deleteRsvp = async (name) => {
+    try {
+      await fetch(`${BACKEND_URL}/rsvps/${name}`, {
+        method: 'DELETE'
+      });
+      loadRsvps();
+    } catch (error) {
+      console.error("Error deleting rsvp:", error);
+    }
+  };
+
   useEffect(() => {
     loadPodcasts();
+    loadRsvps();
   }, []);
 
   const fetchAbouts = async () => {
@@ -238,9 +360,9 @@ const Dashboard = () => {
 
   return (
   
-    <div className="mt-20 tracking-wide bg-green-700 py-8">
+    <div className="tracking-wide bg-green-700 py-8">
   {/* Sponsors Section */}
-  <h2 className="text-3xl text-center font-semibold text-white mb-10">Sponsors</h2>
+  <h2 className="text-3xl text-center font-semibold text-white my-10">Partners</h2>
   <div className="flex flex-wrap justify-center">
     {sponsors.map((sponsor, index) => (
       <div key={index} className="item-card bg-green-700 p-4 m-2 rounded-lg shadow-md">
@@ -464,7 +586,148 @@ const Dashboard = () => {
           Add Testimonial
         </button>
       </div>
+            {/* Event List Section */}
+            <div className="w-screen  px-6 py-12 ">
+        <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8">Upcoming Events</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {events.map((event, index) => (
+            <div
+              key={index}
+              className="bg-customlightBrown p-6 rounded-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105 flex flex-col"
+            >
+              <h3 className="text-2xl font-semibold mb-4">{event.Name}</h3>
+              <div className="mb-4">
+                <p className="text-sm mb-2"><strong>Date:</strong> {event.Date}</p>
+                <p className="text-sm mb-2"><strong>About:</strong> {event.About}</p>
+                <p className="text-sm mb-2"><strong>Guests:</strong> {event.Guests.join(", ")}</p>
+                <p className="text-sm mb-2"><strong>Time:</strong> {event.Time.join(", ")}</p>
+                <p className="text-sm"><strong>Activities:</strong> {event.Activities.join(", ")}</p>
+              </div>
+              <button onClick={() => deleteEvent(event.Name)} className="mt-2 text-red-500">
+              Delete
+            </button>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+        <h3 className="text-2xl font-medium text-white mb-4">Add a Event</h3>
+      
+        <h2>
+  Guests: {newEvent.guest.length > 0 ? newEvent.guest.join(", ") : "No guests added yet"}
+</h2>
+<h2>
+  Activities: {newEvent.activities.length > 0 ? newEvent.activities.join(", ") : "No activities added yet"}
+</h2>
+<h2>
+  Schedule: {newEvent.time.length > 0 ? newEvent.time.join(", ") : "No Schedule added yet"}
+</h2>
+
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Name"
+            value={newEvent.name}
+            onChange={(e) => setNewEvent({ ...newEvent, name: e.target.value })}
+            className="px-4 py-2 rounded-md text-black"
+          />
+        </div>
+        <div className="mb-4">
+          <textarea
+            placeholder="About"
+            value={newEvent.about}
+            onChange={(e) => setNewEvent({ ...newEvent, about: e.target.value })}
+            className="px-4 py-2 rounded-md text-black w-full"
+          />
+        </div>
+        <div className="mb-4 flex gap-4">
+          <input
+            type="text"
+            placeholder="Add Activity"
+            value={tempValue}
+            onChange={(e) => setTempValue(e.target.value)}
+            className="px-4 py-2 rounded-md text-black flex-1"
+          />
+          <button
+            onClick={() => addToArray('activities')}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md"
+          >
+            Add
+          </button>
+        </div>
+      
+        <div className="mb-4 flex gap-4">
+          <input
+            type="text"
+            placeholder="Add Schedule"
+            value={tempValue}
+            onChange={(e) => setTempValue(e.target.value)}
+            className="px-4 py-2 rounded-md text-black flex-1"
+          />
+          <button
+            onClick={() => addToArray('time')}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md"
+          >
+            Add
+          </button>
+        </div>
+        <div className="mb-4 flex gap-4">
+          <input
+            type="text"
+            placeholder="Add Guest"
+            value={tempValue}
+            onChange={(e) => setTempValue(e.target.value)}
+            className="px-4 py-2 rounded-md text-black flex-1"
+          />
+          <button
+            onClick={() => addToArray('guest')}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md"
+          >
+            Add
+          </button>
+        </div>
+        <div className="mb-4">
+          <input
+            type="date"
+            onChange={handleDateChange}
+            className="px-4 py-2 rounded-md text-black"
+          />
+        </div>
+        <button
+          onClick={addEvent}
+          className="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition duration-300"
+        >
+          Add Event
+        </button>
+      </div>
+      </div>
+
+      <div className="rsvp-list">
+      {Object.keys(groupedRsvps).map((groupId) => (
+        <div key={groupId} className="rsvp-group border p-4 mb-4 rounded">
+          {/* Group Header */}
+          <h2 className="text-xl font-bold mb-3">Group ID: {groupId}</h2>
+
+          {/* List of RSVPs in this group */}
+          <ul className="list-disc pl-6">
+            {groupedRsvps[groupId].map((rsvp) => (
+              <li key={rsvp.name} className="mb-2">
+                <p><strong>Name:</strong> {rsvp.name}</p>
+                <p><strong>Phone:</strong> {rsvp.phone}</p>
+                <p><strong>Email:</strong> {rsvp.email}</p>
+                <button onClick={() => deleteRsvp(rsvp.name)} className="mt-2 text-red-500">
+              Delete
+            </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
+
+    </div>
+ 
+
+    
     
   );
 };

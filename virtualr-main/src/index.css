@@ -15,7 +15,7 @@
 }
 
 body {
-  @apply bg-customBrown text-white tracking-wider;
+  @apply bg-white text-white tracking-wider;
 }
 
 html {

@@ -24,8 +24,7 @@ export const navItems = [
   { label: "Partners", href: "/sponsor" },
   { label: "Podcasts", href: "/podcast" },
   { label: "Rodeo Events", href: "/rodeo" },
-  { label: "Contact Us", href: "#Contact" },
-  { label: "Testimonials", href: "#Testimonial" },
+
 ];
 
 

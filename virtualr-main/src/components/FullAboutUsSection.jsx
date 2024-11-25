@@ -54,7 +54,40 @@ const FullAboutUsSection = () => {
    
   </div>
 </div>
-      <h1 className="text-4xl font-bold text-center mb-10 text-white">About Us</h1>
+{abouts.length === 0 ? (
+      // Centered placeholder text when no events exist
+      <div className="flex flex-col items-center justify-center h-[300px] text-center text-xl font-semibold text-black">
+ <div 
+      style={{
+        fontFamily:"omnes-pro",
+        fontWeight: 400,
+        fontSize: "42px",
+        lineHeight: "1.2em",
+    
+      }}
+      className=" text-xl font-semibold text-black mb-20">
+        More information to come.
+      </div>
+      <div
+      style={{
+        fontFamily:"freight-sans-pro",
+        fontWeight: 400,
+        fontSize: "18px",
+        lineHeight: "1.6em",
+      }}
+      >
+      More about us coming soon 
+        </div>
+      </div>
+     
+    ) : (
+      <>
+<h1 className="text-4xl font-bold text-center mb-10 text-black" style={{
+              fontFamily: "omnes-pro",
+              fontStyle: "normal",
+              fontWeight: 400,
+              fontSize: "42px",
+            }}>About Us</h1>
 
       {abouts.map((about, index) => (
         <div
@@ -71,12 +104,21 @@ const FullAboutUsSection = () => {
           </div>
           
           {/* Text */}
-          <div className="lg:w-1/2 lg:pl-10 text-white">
-            <h2 className="text-2xl font-semibold mb-4">{about.title}</h2>
-            <p>{about.text}</p>
+          <div className="lg:w-1/2 lg:pl-10  text-black"
+            >
+            <h2 className="text-2xl font-semibold mb-4" style={{
+              fontFamily: "omnes-pro",
+              fontStyle: "normal",
+            }}>{about.title}</h2>
+            <p style={{
+               fontFamily: 'freight-sans-pro',
+               fontWeight: 400,
+               fontStyle: 'normal',
+            }
+                 }>{about.text}</p>
           </div>
         </div>
-      ))}
+      ))},</>)}
     </div>
     </section>
   );
